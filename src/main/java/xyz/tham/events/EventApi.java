@@ -1,9 +1,7 @@
 package xyz.tham.events;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -18,5 +16,29 @@ public class EventApi {
                 .ok()
                 .entity(eventManager.all())
                 .build();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response create(Event event) {
+        eventManager.create(event);
+        return Response
+                .created(null)
+                .build();
+    }
+
+    @GET
+    @Path("{id}")
+    public Response get(@PathParam("id") int id) {
+        return Response
+                .ok()
+                .entity(eventManager.get(id))
+                .build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    public void delete(@PathParam("id") int id) {
+        eventManager.delete(id);
     }
 }
