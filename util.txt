@@ -1,0 +1,7 @@
+mvn io.quarkus.platform:quarkus-maven-plugin:2.16.4.Final:create -DprojectGroupId=xyz.tham -DprojectArtifactId=eventz
+
+
+mvnw quarkus:add-extension -Dextensions='quarkus-smallrye-openapi'
+
+http://localhost:8080/q/swagger-ui
+http://localhost:8080/q/health-ui/

@@ -2,8 +2,10 @@ package xyz.tham.events;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class EventManager {
@@ -38,5 +40,17 @@ public class EventManager {
                 break;
             }
         }
+    }
+
+    public List<Event> recommendations() {
+
+        return events.stream()
+                .filter(event -> isEven(event.getId()))
+                .limit(2)
+                .collect(Collectors.toList());
+    }
+
+    private boolean isEven(int value) {
+        return (value % 2 == 0);
     }
 }
